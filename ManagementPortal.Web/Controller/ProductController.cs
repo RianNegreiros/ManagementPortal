@@ -31,5 +31,14 @@ namespace ManagementPortal.Web.Controller
 
       return Ok(productViewModels);
     }
+
+    [HttpPatch("{id}")]
+    public IActionResult ArchiveProduct(int id)
+    {
+      _logger.LogInformation("Archiving Product");
+      var response = _productService.ArchiveProduct(id);
+
+      return Ok(response);
+    }
   }
 }

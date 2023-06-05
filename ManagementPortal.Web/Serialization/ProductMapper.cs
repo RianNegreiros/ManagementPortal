@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ManagementPortal.Web.ViewModels;
 
 namespace ManagementPortal.Web.Serialization
 {
-  public class ProductMapper
+  public static class ProductMapper
   {
     /// <summary>
     ///

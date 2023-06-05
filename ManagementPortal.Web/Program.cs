@@ -1,4 +1,7 @@
 using ManagementPortal.Data;
+using ManagementPortal.Services.Customer;
+using ManagementPortal.Services.Inventory;
+using ManagementPortal.Services.Order;
 using ManagementPortal.Services.Product;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +21,9 @@ builder.Services.AddDbContext<DataDbContext>(options =>
 });
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 
