@@ -1,4 +1,5 @@
 using ManagementPortal.Data;
+using ManagementPortal.Services.Product;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<DataDbContext>(options =>
     options.EnableDetailedErrors();
     options.UseNpgsql(builder.Configuration.GetConnectionString("database.dev"));
 });
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
