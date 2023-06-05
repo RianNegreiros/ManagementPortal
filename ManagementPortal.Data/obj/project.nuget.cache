@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3IUV0J1F1OAspj01Yba0MZ4z/haQTsMHg1VPvyVS5NNoYWgLsAbxIwGK1rhLSTOJZihc9lh7OSDLUYuWgQSOWg==",
+  "success": true,
+  "projectFilePath": "/home/riann/dev/ManagementPortal/ManagementPortal.Data/ManagementPortal.Data.csproj",
+  "expectedPackageFiles": [
+    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.16/microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
