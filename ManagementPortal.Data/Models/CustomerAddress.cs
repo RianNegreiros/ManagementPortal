@@ -2,12 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ManagementPortal.Data.Models
 {
-  public class CustomerAddress
+  public class CustomerAddress : BaseModel
   {
-    public int Id { get; set; }
-    public DateTime Created { get; set; }
-    public DateTime? Updated { get; set; }
-
     [MaxLength(100)]
     public string AddressLine1 { get; set; }
 
