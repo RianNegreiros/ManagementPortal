@@ -3,7 +3,7 @@
     <div class="app-menu">
       <side-menu />
     </div>
-    <div id="app-content">
+    <div class="app-content">
       <router-view />
     </div>
   </div>
@@ -14,10 +14,8 @@ import { Component, Vue } from "vue-property-decorator";
 import SideMenu from "@/components/SideMeu.vue";
 
 @Component({
-  components: {
-    name: "App",
-    components: { SideMenu },
-  },
+  name: "App",
+  components: { SideMenu },
 })
 export default class App extends Vue {}
 </script>
@@ -26,7 +24,7 @@ export default class App extends Vue {}
 @import "@/scss/global.scss";
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -51,5 +49,10 @@ export default class App extends Vue {}
 
 a {
   text-decoration: none;
+}
+
+hr {
+  border: 1px solid #eee;
+  margin: 1rem 0;
 }
 </style>
