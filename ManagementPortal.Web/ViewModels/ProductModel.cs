@@ -1,5 +1,3 @@
-using System;
-
 namespace ManagementPortal.Web.ViewModels
 {
   /// <summary>

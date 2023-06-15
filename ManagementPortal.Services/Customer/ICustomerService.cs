@@ -1,4 +1,3 @@
-
 namespace ManagementPortal.Services.Customer
 {
   public interface ICustomerService

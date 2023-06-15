@@ -1,9 +1,6 @@
-using System.Linq;
-using ManagementPortal.Data.Models;
 using ManagementPortal.Services.Product;
 using ManagementPortal.Web.Serialization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ManagementPortal.Web.Controller
 {
