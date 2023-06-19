@@ -1,7 +1,10 @@
 <template>
   <div class="inventory-container">
-    <h1 id="inventoryTitle">Inventory Dashboard</h1>
+    <h1 id="inventoryTitle">
+      Inventory Dashboard
+    </h1>
     <hr />
+
     <div class="inventory-actions">
       <side-menu-button @click.native="showNewProductModal" id="addNewBtn">
         Add New Item
@@ -10,6 +13,7 @@
         Receive Shipment
       </side-menu-button>
     </div>
+
     <table id="inventoryTable" class="table">
       <tr>
         <th>Item</th>
@@ -18,6 +22,7 @@
         <th>Taxable</th>
         <th>Delete</th>
       </tr>
+
       <tr v-for="item in inventory" :key="item.id">
         <td>
           {{ item.product.name }}
@@ -29,99 +34,69 @@
           {{ item.product.price | price }}
         </td>
         <td>
-          <span v-if="item.product.isTaxable"> Yes </span>
-          <span v-else> No </span>
+          <span v-if="item.product.isTaxable">
+            Yes
+          </span>
+          <span v-else>
+            No
+          </span>
         </td>
         <td>
-          <div>X</div>
+          <div>
+            X
+          </div>
         </td>
       </tr>
     </table>
 
-    <new-product-modal
-      v-if="isNewProductVisible"
-      @save:product="saveNewProduct"
-      @close="closeModals"
-    />
-    <shipment-modal
-      v-if="isShipmentVisible"
-      :inventory="inventory"
-      @save:shipment="saveNewShipment"
-      @close="closeModals"
-    />
+    <new-product-modal v-if="isNewProductVisible" @save:product="saveNewProduct" @close="closeModals" />
+
+    <shipment-modal v-if="isShipmentVisible" :inventory="inventory" @save:shipment="saveNewShipment"
+      @close="closeModals" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { IProduct, IProductInventory } from "@/types/Product";
 import { IShipment } from "@/types/Shipment";
 import SideMenuButton from "@/components/SideMenuButton.vue";
 import NewProductModal from "@/components/modals/NewProductModal.vue";
 import ShipmentModal from "@/components/modals/ShipmentModal.vue";
+import { InventoryService } from "@/services/inventory-service";
 
+const inventoryService = new InventoryService();
 @Component({
   name: "Inventory",
-  components: { SideMenuButton, NewProductModal, ShipmentModal },
+  components: { SideMenuButton, NewProductModal, ShipmentModal }
 })
 export default class Inventory extends Vue {
   isNewProductVisible = false;
   isShipmentVisible = false;
-
-  inventory: IProductInventory[] = [
-    {
-      id: 1,
-      product: {
-        id: 1,
-        name: "Some Product",
-        description: "Good stuff",
-        price: 100,
-        createdOn: new Date(),
-        updatedOn: new Date(),
-        isTaxable: true,
-        isArchived: false,
-      },
-      quantityOnHand: 100,
-      idealQuantity: 100,
-    },
-    {
-      id: 2,
-      product: {
-        id: 2,
-        name: "Another Product",
-        description: "Good stuff",
-        price: 100,
-        createdOn: new Date(),
-        updatedOn: new Date(),
-        isTaxable: false,
-        isArchived: false,
-      },
-      quantityOnHand: 40,
-      idealQuantity: 20,
-    },
-  ];
-
+  inventory: IProductInventory[] = [];
   closeModals() {
     this.isShipmentVisible = false;
     this.isNewProductVisible = false;
   }
-
   showNewProductModal() {
     this.isNewProductVisible = true;
   }
-
   showShipmentModal() {
     this.isShipmentVisible = true;
   }
-
   saveNewProduct(newProduct: IProduct) {
     console.log("saveNewProduct:");
     console.log(newProduct);
   }
-
   saveNewShipment(shipment: IShipment) {
     console.log("saveNewShipment:");
     console.log(shipment);
+  }
+  async initialize() {
+    this.inventory = await inventoryService.getInventory();
+  }
+  async created() {
+    await this.initialize();
   }
 }
 </script>
