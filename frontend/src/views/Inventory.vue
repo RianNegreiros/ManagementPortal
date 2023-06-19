@@ -2,7 +2,14 @@
   <div class="inventory-container">
     <h1 id="inventoryTitle">Inventory Dashboard</h1>
     <hr />
-
+    <div class="inventory-actions">
+      <side-menu-button @click.native="showNewProductModal" id="addNewBtn">
+        Add New Item
+      </side-menu-button>
+      <side-menu-button @click.native="showShipmentModal" id="receiveShipmentBtn">
+        Receive Shipment
+      </side-menu-button>
+    </div>
     <table id="inventoryTable" class="table">
       <tr>
         <th>Item</th>
@@ -11,108 +18,112 @@
         <th>Taxable</th>
         <th>Delete</th>
       </tr>
-
       <tr v-for="item in inventory" :key="item.id">
-        <td>{{ item.product.name }}</td>
-        <td>{{ item.quantityOnHand }}</td>
-        <td>{{ item.product.price }}</td>
         <td>
-          <span v-if="item.product.isTaxable">Yes</span>
-          <span v-else>No</span>
+          {{ item.product.name }}
         </td>
-        <div>x</div>
+        <td>
+          {{ item.quantityOnHand }}
+        </td>
+        <td>
+          {{ item.product.price | price }}
+        </td>
+        <td>
+          <span v-if="item.product.isTaxable"> Yes </span>
+          <span v-else> No </span>
+        </td>
+        <td>
+          <div>X</div>
+        </td>
       </tr>
     </table>
+
+    <new-product-modal
+      v-if="isNewProductVisible"
+      @save:product="saveNewProduct"
+      @close="closeModals"
+    />
+    <shipment-modal
+      v-if="isShipmentVisible"
+      :inventory="inventory"
+      @save:shipment="saveNewShipment"
+      @close="closeModals"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { IProductInventory } from "@/types/Product";
-import { Component, Vue } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
+import { IProduct, IProductInventory } from "@/types/Product";
+import { IShipment } from "@/types/Shipment";
+import SideMenuButton from "@/components/SideMenuButton.vue";
+import NewProductModal from "@/components/modals/NewProductModal.vue";
+import ShipmentModal from "@/components/modals/ShipmentModal.vue";
 
 @Component({
   name: "Inventory",
-  components: {},
+  components: { SideMenuButton, NewProductModal, ShipmentModal },
 })
 export default class Inventory extends Vue {
+  isNewProductVisible = false;
+  isShipmentVisible = false;
+
   inventory: IProductInventory[] = [
     {
       id: 1,
       product: {
         id: 1,
-        name: "Product 1",
-        description: "Product 1 description",
-        price: 1.99,
+        name: "Some Product",
+        description: "Good stuff",
+        price: 100,
         createdOn: new Date(),
         updatedOn: new Date(),
         isTaxable: true,
         isArchived: false,
       },
-      quantityOnHand: 10,
-      idealQuantity: 20,
+      quantityOnHand: 100,
+      idealQuantity: 100,
     },
     {
       id: 2,
       product: {
         id: 2,
-        name: "Product 2",
-        description: "Product 2 description",
-        price: 2.99,
+        name: "Another Product",
+        description: "Good stuff",
+        price: 100,
         createdOn: new Date(),
         updatedOn: new Date(),
-        isTaxable: true,
-        isArchived: false,
-      },
-      quantityOnHand: 20,
-      idealQuantity: 30,
-    },
-    {
-      id: 3,
-      product: {
-        id: 3,
-        name: "Product 3",
-        description: "Product 3 description",
-        price: 3.99,
-        createdOn: new Date(),
-        updatedOn: new Date(),
-        isTaxable: true,
-        isArchived: false,
-      },
-      quantityOnHand: 30,
-      idealQuantity: 40,
-    },
-    {
-      id: 4,
-      product: {
-        id: 4,
-        name: "Product 4",
-        description: "Product 4 description",
-        price: 4.99,
-        createdOn: new Date(),
-        updatedOn: new Date(),
-        isTaxable: true,
+        isTaxable: false,
         isArchived: false,
       },
       quantityOnHand: 40,
-      idealQuantity: 50,
-    },
-    {
-      id: 5,
-      product: {
-        id: 5,
-        name: "Product 5",
-        description: "Product 5 description",
-        price: 5.99,
-        createdOn: new Date(),
-        updatedOn: new Date(),
-        isTaxable: true,
-        isArchived: false,
-      },
-      quantityOnHand: 50,
-      idealQuantity: 60,
+      idealQuantity: 20,
     },
   ];
+
+  closeModals() {
+    this.isShipmentVisible = false;
+    this.isNewProductVisible = false;
+  }
+
+  showNewProductModal() {
+    this.isNewProductVisible = true;
+  }
+
+  showShipmentModal() {
+    this.isShipmentVisible = true;
+  }
+
+  saveNewProduct(newProduct: IProduct) {
+    console.log("saveNewProduct:");
+    console.log(newProduct);
+  }
+
+  saveNewShipment(shipment: IShipment) {
+    console.log("saveNewShipment:");
+    console.log(shipment);
+  }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

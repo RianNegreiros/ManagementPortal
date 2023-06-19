@@ -1,9 +1,6 @@
 <template>
   <div class="btn-link">
-    <button
-      :class="['side-menu-button', { 'full-width': isFullWidth }]"
-      type="button"
-    >
+    <button @click="onClick" :class="['side-menu-button', { 'full-width': isFullWidth }]" type="button">
       <slot></slot>
     </button>
   </div>
@@ -19,16 +16,11 @@ import { Prop } from "vue-property-decorator";
   components: {},
 })
 export default class SideMenuButton extends Vue {
-  @Prop({ required: false, type: String })
-  link?: string;
-
   @Prop({ required: false, type: Boolean, default: false })
   isFullWidth?: boolean;
 
-  visitRoute() {
-    if (this.link) {
-      this.$router.push(this.link);
-    }
+  onClick() {
+    this.$emit("button:click");
   }
 }
 </script>
@@ -49,19 +41,23 @@ export default class SideMenuButton extends Vue {
   border: none;
   border-bottom: 2px solid darken($solar-blue, 20%);
   border-radius: 3px;
+
   &:hover {
     background: lighten($solar-blue, 20%);
     transition: background-color 0.5s;
   }
+
   &:disabled {
     background: lighten($solar-blue, 15%);
     border-bottom: 2px solid lighten($solar-blue, 20%);
   }
+
   &:active {
     background: $solar-yellow;
     border-bottom: 2px solid lighten($solar-yellow, 20%);
   }
 }
+
 .full-width {
   display: block;
   width: 100%;

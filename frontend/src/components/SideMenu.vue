@@ -1,19 +1,39 @@
 <template>
   <div class="side-menu-container">
     <router-link to="/">
-      <img id="logo" src="../assets/logo.png" alt="Logo" />
+      <img
+        id="imgLogo"
+        alt="Logo"
+        src="../assets/logo.png"
+      />
     </router-link>
     <h1>Management Portal</h1>
-    <side-menu-button id="menuInventory" :link="'/inventory'" is-full-width>
+    <side-menu-button
+      id="menuInventory"
+      is-full-width
+      @button:click="goToRoute('/inventory')"
+    >
       Inventory
     </side-menu-button>
-    <side-menu-button id="menuCustomers" :link="'/customers'">
-      Customers
+    <side-menu-button
+      id="menuCustomers"
+      is-full-width
+      @button:click="goToRoute('/customers')"
+    >
+      Manage Customers
     </side-menu-button>
-    <side-menu-button id="menuInvoice" :link="'/invoice/new'">
-      Invoice
+    <side-menu-button
+      id="menuInvoice"
+      is-full-width
+      @button:click="goToRoute('/invoice/new')"
+    >
+      New Invoice
     </side-menu-button>
-    <side-menu-button id="menuOrders" :link="'/orders'">
+    <side-menu-button
+      id="menuOrders"
+      is-full-width
+      @button:click="goToRoute('/orders')"
+    >
       Orders
     </side-menu-button>
   </div>
@@ -27,11 +47,16 @@ import SideMenuButton from "@/components/SideMenuButton.vue";
   name: "SideMenu",
   components: { SideMenuButton },
 })
-export default class SideMenu extends Vue {}
+export default class SideMenu extends Vue {
+  async goToRoute(route: string) {
+    await this.$router.push(route);
+  }
+}
 </script>
 
 <style scoped lang="scss">
 @import "@/scss/global.scss";
+
 .side-menu-container {
   background-color: #fcfcfc;
   height: 100vh;
@@ -42,9 +67,11 @@ export default class SideMenu extends Vue {}
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
   box-sizing: border-box;
 }
-#logo {
+
+#imgLogo {
   width: 100%;
 }
+
 h1 {
   font-size: 1.2rem;
   margin: 1rem 0;
