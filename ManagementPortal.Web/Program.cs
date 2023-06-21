@@ -14,10 +14,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 builder.Services.AddDbContext<DataDbContext>(options =>
 {
-    options.EnableDetailedErrors();
-    options.UseNpgsql(builder.Configuration.GetConnectionString("database.dev"));
+  options.EnableDetailedErrors();
+  options.UseNpgsql(builder.Configuration.GetConnectionString("database.dev"));
 });
 
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -30,11 +32,20 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(builder => builder
+    .WithOrigins(
+        "http://localhost:8080",
+        "http://localhost:8081",
+        "http://localhost:8082"
+    )
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.UseAuthorization();
 

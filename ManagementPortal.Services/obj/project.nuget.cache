@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GHPNfNGJ+1Dj9MdYi26AjDkOWCV6xdiVG3IqqMLeGono02h+w8Ib5YOT2UECpSvCZmmP+Xpiyh8XE6pk9afUew==",
+  "dgSpecHash": "ljG4q5l2L5aCIJDXJp6m8lqHuIjY+wyqvzdU7hH7eELFDQJJ00Z1ytF9xBIJU0LaOaUqZiCQpnfVUZRfzX11wg==",
   "success": true,
   "projectFilePath": "/home/riann/dev/ManagementPortal/ManagementPortal.Services/ManagementPortal.Services.csproj",
   "expectedPackageFiles": [
@@ -56,7 +56,7 @@
     "/home/riann/.nuget/packages/system.security.permissions/4.5.0/system.security.permissions.4.5.0.nupkg.sha512",
     "/home/riann/.nuget/packages/system.security.principal.windows/4.5.0/system.security.principal.windows.4.5.0.nupkg.sha512",
     "/home/riann/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
-    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.16/microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
+    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.18/microsoft.aspnetcore.app.ref.6.0.18.nupkg.sha512"
   ],
   "logs": []
 }
