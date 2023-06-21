@@ -1,11 +1,7 @@
 <template>
   <div class="side-menu-container">
     <router-link to="/">
-      <img
-        id="imgLogo"
-        alt="Logo"
-        src="../assets/logo.png"
-      />
+      <img id="imgLogo" alt="Logo" src="../assets/logo.png" />
     </router-link>
     <h1>Management Portal</h1>
     <side-menu-button

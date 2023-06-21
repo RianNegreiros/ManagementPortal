@@ -1,8 +1,6 @@
 <template>
   <div class="inventory-container">
-    <h1 id="inventoryTitle">
-      Inventory Dashboard
-    </h1>
+    <h1 id="inventoryTitle">Inventory Dashboard</h1>
     <hr />
 
     <div class="inventory-actions">
@@ -28,9 +26,10 @@
           {{ item.product.name }}
         </td>
         <td
-          v-bind:class="
-            `${applyColor(item.quantityOnHand, item.idealQuantity)}`
-          "
+          v-bind:class="`${applyColor(
+            item.quantityOnHand,
+            item.idealQuantity
+          )}`"
         >
           {{ item.quantityOnHand }}
         </td>
@@ -38,12 +37,8 @@
           {{ item.product.price | price }}
         </td>
         <td>
-          <span v-if="item.product.isTaxable">
-            Yes
-          </span>
-          <span v-else>
-            No
-          </span>
+          <span v-if="item.product.isTaxable"> Yes </span>
+          <span v-else> No </span>
         </td>
         <td>
           <div
@@ -84,11 +79,11 @@ const productService = new ProductService();
 
 @Component({
   name: "Inventory",
-  components: { SolarButton, NewProductModal, ShipmentModal }
+  components: { SolarButton, NewProductModal, ShipmentModal },
 })
 export default class Inventory extends Vue {
-  isNewProductVisible: boolean = false;
-  isShipmentVisible: boolean = false;
+  isNewProductVisible = false;
+  isShipmentVisible = false;
 
   inventory: IProductInventory[] = [];
 

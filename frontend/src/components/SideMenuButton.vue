@@ -1,6 +1,10 @@
 <template>
   <div class="btn-link">
-    <button @click="onClick" :class="['side-menu-button', { 'full-width': isFullWidth }]" type="button">
+    <button
+      @click="onClick"
+      :class="['side-menu-button', { 'full-width': isFullWidth }]"
+      type="button"
+    >
       <slot></slot>
     </button>
   </div>
