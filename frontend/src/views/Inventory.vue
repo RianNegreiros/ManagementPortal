@@ -1,15 +1,19 @@
 <template>
   <div class="inventory-container">
-    <h1 id="inventoryTitle">Inventory Dashboard</h1>
+    <h1 id="inventoryTitle">
+      Inventory Dashboard
+    </h1>
     <hr />
 
+    <inventory-chart />
+
     <div class="inventory-actions">
-      <solar-button @click.native="showNewProductModal" id="addNewBtn">
+      <custom-button @button:click="showNewProductModal" id="addNewBtn">
         Add New Item
-      </solar-button>
-      <solar-button @click.native="showShipmentModal" id="receiveShipmentBtn">
+      </custom-button>
+      <custom-button @button:click="showShipmentModal" id="receiveShipmentBtn">
         Receive Shipment
-      </solar-button>
+      </custom-button>
     </div>
 
     <table id="inventoryTable" class="table">
@@ -26,10 +30,9 @@
           {{ item.product.name }}
         </td>
         <td
-          v-bind:class="`${applyColor(
-            item.quantityOnHand,
-            item.idealQuantity
-          )}`"
+          v-bind:class="
+            `${applyColor(item.quantityOnHand, item.idealQuantity)}`
+          "
         >
           {{ item.quantityOnHand }}
         </td>
@@ -37,8 +40,12 @@
           {{ item.product.price | price }}
         </td>
         <td>
-          <span v-if="item.product.isTaxable"> Yes </span>
-          <span v-else> No </span>
+          <span v-if="item.product.isTaxable">
+            Yes
+          </span>
+          <span v-else>
+            No
+          </span>
         </td>
         <td>
           <div
@@ -68,22 +75,23 @@
 import { Component, Vue } from "vue-property-decorator";
 import { IProduct, IProductInventory } from "@/types/Product";
 import { IShipment } from "@/types/Shipment";
-import SolarButton from "@/components/SolarButton.vue";
-import NewProductModal from "@/components/modals/NewProductModal.vue";
-import ShipmentModal from "@/components/modals/ShipmentModal.vue";
 import { InventoryService } from "@/services/inventory-service";
 import { ProductService } from "@/services/product-service";
+import CustomButton from "@/components/CustomButton.vue";
+import NewProductModal from "@/components/modals/NewProductModal.vue";
+import ShipmentModal from "@/components/modals/ShipmentModal.vue";
+import InventoryChart from "@/components/charts/InventoryChart.vue";
 
 const inventoryService = new InventoryService();
 const productService = new ProductService();
 
 @Component({
   name: "Inventory",
-  components: { SolarButton, NewProductModal, ShipmentModal },
+  components: { CustomButton, NewProductModal, ShipmentModal, InventoryChart }
 })
 export default class Inventory extends Vue {
-  isNewProductVisible = false;
-  isShipmentVisible = false;
+  isNewProductVisible: boolean = false;
+  isShipmentVisible: boolean = false;
 
   inventory: IProductInventory[] = [];
 
@@ -131,6 +139,7 @@ export default class Inventory extends Vue {
 
   async initialize() {
     this.inventory = await inventoryService.getInventory();
+    await this.$store.dispatch("assignSnapshots");
   }
 
   async created() {

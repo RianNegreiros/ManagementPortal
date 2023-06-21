@@ -2,7 +2,8 @@
   <div class="btn-link">
     <button
       @click="onClick"
-      :class="['side-menu-button', { 'full-width': isFullWidth }]"
+      :disabled="disabled"
+      :class="['custom-button', { 'full-width': isFullWidth }]"
       type="button"
     >
       <slot></slot>
@@ -16,12 +17,15 @@ import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 
 @Component({
-  name: "SideMenuButton",
-  components: {},
+  name: "CustomButton",
+  components: {}
 })
-export default class SideMenuButton extends Vue {
+export default class CustomButton extends Vue {
   @Prop({ required: false, type: Boolean, default: false })
   isFullWidth?: boolean;
+
+  @Prop({ required: false, type: Boolean, default: false })
+  disabled?: boolean;
 
   onClick() {
     this.$emit("button:click");
@@ -32,7 +36,7 @@ export default class SideMenuButton extends Vue {
 <style scoped lang="scss">
 @import "@/scss/global.scss";
 
-.side-menu-button {
+.custom-button {
   background: lighten($solar-blue, 10%);
   color: white;
   padding: 0.8rem;

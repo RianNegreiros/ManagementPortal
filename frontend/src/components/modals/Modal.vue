@@ -10,9 +10,11 @@
         <header class="modal-header" id="modalTitle">
           <slot name="header"> </slot>
         </header>
+
         <section class="modal-body" id="modalDescription">
           <slot name="body"> </slot>
         </section>
+
         <footer class="modal-footer">
           <slot name="footer"> </slot>
         </footer>
@@ -27,7 +29,7 @@ import Component from "vue-class-component";
 
 @Component({
   name: "Modal",
-  components: {},
+  components: {}
 })
 export default class Modal extends Vue {
   close() {
@@ -38,7 +40,6 @@ export default class Modal extends Vue {
 
 <style scoped lang="scss">
 @import "@/scss/global.scss";
-
 .modal-backdrop {
   position: fixed;
   top: 0;

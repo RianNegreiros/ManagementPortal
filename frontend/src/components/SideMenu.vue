@@ -1,47 +1,47 @@
 <template>
   <div class="side-menu-container">
     <router-link to="/">
-      <img id="imgLogo" alt="Logo" src="../assets/logo.png" />
+      <img id="imgLogo" alt="logo" src="../assets/logo.png" />
     </router-link>
     <h1>Management Portal</h1>
-    <side-menu-button
+    <custom-button
       id="menuInventory"
       is-full-width
       @button:click="goToRoute('/inventory')"
     >
       Inventory
-    </side-menu-button>
-    <side-menu-button
+    </custom-button>
+    <custom-button
       id="menuCustomers"
       is-full-width
       @button:click="goToRoute('/customers')"
     >
       Manage Customers
-    </side-menu-button>
-    <side-menu-button
+    </custom-button>
+    <custom-button
       id="menuInvoice"
       is-full-width
       @button:click="goToRoute('/invoice/new')"
     >
       New Invoice
-    </side-menu-button>
-    <side-menu-button
+    </custom-button>
+    <custom-button
       id="menuOrders"
       is-full-width
       @button:click="goToRoute('/orders')"
     >
       Orders
-    </side-menu-button>
+    </custom-button>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import SideMenuButton from "@/components/SideMenuButton.vue";
+import CustomButton from "@/components/CustomButton.vue";
 
 @Component({
   name: "SideMenu",
-  components: { SideMenuButton },
+  components: { CustomButton }
 })
 export default class SideMenu extends Vue {
   async goToRoute(route: string) {

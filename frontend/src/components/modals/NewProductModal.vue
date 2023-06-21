@@ -1,6 +1,10 @@
+<!--suppress XmlUnboundNsPrefix -->
+
 <template>
   <modal>
-    <template v-slot:header> Add New Product </template>
+    <template v-slot:header>
+      Add New Product
+    </template>
     <template v-slot:body>
       <ul class="newProduct">
         <li>
@@ -32,33 +36,33 @@
       </ul>
     </template>
     <template v-slot:footer>
-      <side-menu-button
+      <custom-button
         type="button"
         @click.native="save"
         aria-label="save new item"
       >
         Save Product
-      </side-menu-button>
-      <side-menu-button
+      </custom-button>
+      <custom-button
         type="button"
         @click.native="close"
         aria-label="close modal"
       >
         Close
-      </side-menu-button>
+      </custom-button>
     </template>
   </modal>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import SideMenuButton from "@/components/SideMenuButton.vue";
+import CustomButton from "@/components/CustomButton.vue";
 import Modal from "@/components/modals/Modal.vue";
 import { IProduct } from "@/types/Product";
 
 @Component({
   name: "NewProductModal",
-  components: { SideMenuButton, Modal },
+  components: { CustomButton, Modal }
 })
 export default class NewProductModal extends Vue {
   newProduct: IProduct = {
@@ -69,7 +73,7 @@ export default class NewProductModal extends Vue {
     isTaxable: false,
     name: "",
     price: 0,
-    isArchived: false,
+    isArchived: false
   };
 
   close() {

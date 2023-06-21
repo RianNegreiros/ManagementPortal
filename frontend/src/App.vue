@@ -15,7 +15,7 @@ import SideMenu from "@/components/SideMenu.vue";
 
 @Component({
   name: "App",
-  components: { SideMenu },
+  components: { SideMenu }
 })
 export default class App extends Vue {}
 </script>
