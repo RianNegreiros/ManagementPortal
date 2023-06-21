@@ -7,7 +7,6 @@ namespace ManagementPortal.Services.Inventory
     public List<ProductInventory> GetInventory();
     public ServiceResponse<ProductInventory> UpdateUnitsAvailable(int id, int adjustment);
     public ProductInventory GetByProductId(int productId);
-    public void CreateSnapshot(ProductInventory inventory);
     public List<ProductInventorySnapshot> GetSnapshotHistory();
   }
 }

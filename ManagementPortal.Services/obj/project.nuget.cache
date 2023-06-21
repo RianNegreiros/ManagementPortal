@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ljG4q5l2L5aCIJDXJp6m8lqHuIjY+wyqvzdU7hH7eELFDQJJ00Z1ytF9xBIJU0LaOaUqZiCQpnfVUZRfzX11wg==",
+  "dgSpecHash": "lvQdYWyOIByoe3h3HsxU7QsNHx4hPHDLWHmQnkjc5R1dSllreS7r5NRP7hhKR0qhIsuvDmLcF98FvVK36aexBw==",
   "success": true,
   "projectFilePath": "/home/riann/dev/ManagementPortal/ManagementPortal.Services/ManagementPortal.Services.csproj",
   "expectedPackageFiles": [
@@ -21,9 +21,10 @@
     "/home/riann/.nuget/packages/microsoft.aspnetcore.identity/2.2.0/microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/6.0.16/microsoft.aspnetcore.identity.entityframeworkcore.6.0.16.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
-    "/home/riann/.nuget/packages/microsoft.entityframeworkcore/6.0.16/microsoft.entityframeworkcore.6.0.16.nupkg.sha512",
-    "/home/riann/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.16/microsoft.entityframeworkcore.abstractions.6.0.16.nupkg.sha512",
-    "/home/riann/.nuget/packages/microsoft.entityframeworkcore.analyzers/6.0.16/microsoft.entityframeworkcore.analyzers.6.0.16.nupkg.sha512",
+    "/home/riann/.nuget/packages/microsoft.entityframeworkcore/6.0.18/microsoft.entityframeworkcore.6.0.18.nupkg.sha512",
+    "/home/riann/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.18/microsoft.entityframeworkcore.abstractions.6.0.18.nupkg.sha512",
+    "/home/riann/.nuget/packages/microsoft.entityframeworkcore.analyzers/6.0.18/microsoft.entityframeworkcore.analyzers.6.0.18.nupkg.sha512",
+    "/home/riann/.nuget/packages/microsoft.entityframeworkcore.inmemory/6.0.18/microsoft.entityframeworkcore.inmemory.6.0.18.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.entityframeworkcore.relational/6.0.16/microsoft.entityframeworkcore.relational.6.0.16.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.extensions.caching.abstractions/6.0.0/microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.extensions.caching.memory/6.0.1/microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
