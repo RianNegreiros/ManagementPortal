@@ -12,16 +12,20 @@ namespace ManagementPortal.Web.Controller
     private readonly IInventoryService _inventoryService;
     private readonly ILogger<InventoryController> _logger;
 
-    public InventoryController(ILogger<InventoryController> logger, IInventoryService inventoryService)
+    public InventoryController(
+        ILogger<InventoryController> logger,
+        IInventoryService inventoryService
+    )
     {
-      _logger = logger;
       _inventoryService = inventoryService;
+      _logger = logger;
     }
 
-    [HttpGet]
-    public IActionResult GetCurrentInventory()
+    [HttpGet("/api/inventory")]
+    public ActionResult GetCurrentInventory()
     {
-      _logger.LogInformation("Getting all Inventory");
+      _logger.LogInformation("Getting all inventory...");
+
       var inventory = _inventoryService.GetInventory()
           .Select(pi => new ProductInventoryModel
           {
@@ -36,10 +40,13 @@ namespace ManagementPortal.Web.Controller
       return Ok(inventory);
     }
 
-    [HttpPatch]
-    public IActionResult UpdateInventory([FromBody] ShipmentModel shipment)
+    [HttpPatch("/api/inventory")]
+    public ActionResult UpdateInventory([FromBody] ShipmentModel shipment)
     {
-      _logger.LogInformation($"Updating Inventory for {shipment.ProductId} - Adjustment: {shipment.Adjustment}");
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
       var id = shipment.ProductId;
       var adjustment = shipment.Adjustment;
       var inventory = _inventoryService.UpdateUnitsAvailable(id, adjustment);

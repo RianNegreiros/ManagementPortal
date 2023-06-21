@@ -6,12 +6,12 @@
     <hr />
 
     <div class="inventory-actions">
-      <side-menu-button @click.native="showNewProductModal" id="addNewBtn">
+      <solar-button @click.native="showNewProductModal" id="addNewBtn">
         Add New Item
-      </side-menu-button>
-      <side-menu-button @click.native="showShipmentModal" id="receiveShipmentBtn">
+      </solar-button>
+      <solar-button @click.native="showShipmentModal" id="receiveShipmentBtn">
         Receive Shipment
-      </side-menu-button>
+      </solar-button>
     </div>
 
     <table id="inventoryTable" class="table">
@@ -27,7 +27,11 @@
         <td>
           {{ item.product.name }}
         </td>
-        <td>
+        <td
+          v-bind:class="
+            `${applyColor(item.quantityOnHand, item.idealQuantity)}`
+          "
+        >
           {{ item.quantityOnHand }}
         </td>
         <td>
@@ -42,17 +46,26 @@
           </span>
         </td>
         <td>
-          <div>
-            X
-          </div>
+          <div
+            class="lni-cross-circle product-archive"
+            @click="archiveProduct(item.product.id)"
+          ></div>
         </td>
       </tr>
     </table>
 
-    <new-product-modal v-if="isNewProductVisible" @save:product="saveNewProduct" @close="closeModals" />
+    <new-product-modal
+      v-if="isNewProductVisible"
+      @save:product="saveNewProduct"
+      @close="closeModals"
+    />
 
-    <shipment-modal v-if="isShipmentVisible" :inventory="inventory" @save:shipment="saveNewShipment"
-      @close="closeModals" />
+    <shipment-modal
+      v-if="isShipmentVisible"
+      :inventory="inventory"
+      @save:shipment="saveNewShipment"
+      @close="closeModals"
+    />
   </div>
 </template>
 
@@ -60,45 +73,104 @@
 import { Component, Vue } from "vue-property-decorator";
 import { IProduct, IProductInventory } from "@/types/Product";
 import { IShipment } from "@/types/Shipment";
-import SideMenuButton from "@/components/SideMenuButton.vue";
+import SolarButton from "@/components/SolarButton.vue";
 import NewProductModal from "@/components/modals/NewProductModal.vue";
 import ShipmentModal from "@/components/modals/ShipmentModal.vue";
 import { InventoryService } from "@/services/inventory-service";
+import { ProductService } from "@/services/product-service";
 
 const inventoryService = new InventoryService();
+const productService = new ProductService();
+
 @Component({
   name: "Inventory",
-  components: { SideMenuButton, NewProductModal, ShipmentModal }
+  components: { SolarButton, NewProductModal, ShipmentModal }
 })
 export default class Inventory extends Vue {
-  isNewProductVisible = false;
-  isShipmentVisible = false;
+  isNewProductVisible: boolean = false;
+  isShipmentVisible: boolean = false;
+
   inventory: IProductInventory[] = [];
+
+  async archiveProduct(productId: number) {
+    await productService.archive(productId);
+    await this.initialize();
+  }
+
+  async saveNewProduct(newProduct: IProduct) {
+    await productService.save(newProduct);
+    this.isNewProductVisible = false;
+    await this.initialize();
+  }
+
+  applyColor(current: number, target: number) {
+    if (current <= 0) {
+      return "red";
+    }
+
+    if (Math.abs(target - current) > 8) {
+      return "yellow";
+    }
+
+    return "green";
+  }
+
   closeModals() {
     this.isShipmentVisible = false;
     this.isNewProductVisible = false;
   }
+
   showNewProductModal() {
     this.isNewProductVisible = true;
   }
+
   showShipmentModal() {
     this.isShipmentVisible = true;
   }
-  saveNewProduct(newProduct: IProduct) {
-    console.log("saveNewProduct:");
-    console.log(newProduct);
+
+  async saveNewShipment(shipment: IShipment) {
+    await inventoryService.updateInventoryQuantity(shipment);
+    this.isShipmentVisible = false;
+    await this.initialize();
   }
-  saveNewShipment(shipment: IShipment) {
-    console.log("saveNewShipment:");
-    console.log(shipment);
-  }
+
   async initialize() {
     this.inventory = await inventoryService.getInventory();
   }
+
   async created() {
     await this.initialize();
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import "@/scss/global.scss";
+
+.green {
+  font-weight: bold;
+  color: $solar-green;
+}
+
+.yellow {
+  font-weight: bold;
+  color: $solar-yellow;
+}
+
+.red {
+  font-weight: bold;
+  color: $solar-red;
+}
+
+.inventory-actions {
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+
+.product-archive {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: $solar-red;
+}
+</style>

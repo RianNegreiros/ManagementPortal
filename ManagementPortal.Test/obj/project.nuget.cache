@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3sdkbh/+mFtyV9D8T5AtaaHqilsqqYjG1dAgdMWQWk8f3N56cVT880HUEPwcG9grYHkxXVUtcYXeymco9unEtg==",
+  "dgSpecHash": "DTURp7y0oUUhl4y3ebKdta9iHA66F4REQM838Qqtf7Rgkb6ccGkLkHUu17IyWNru4m/eQDr74wkY0GJXt9QZFg==",
   "success": true,
   "projectFilePath": "/home/riann/dev/ManagementPortal/ManagementPortal.Test/ManagementPortal.Test.csproj",
   "expectedPackageFiles": [
@@ -96,7 +96,7 @@
     "/home/riann/.nuget/packages/xunit.extensibility.core/2.4.1/xunit.extensibility.core.2.4.1.nupkg.sha512",
     "/home/riann/.nuget/packages/xunit.extensibility.execution/2.4.1/xunit.extensibility.execution.2.4.1.nupkg.sha512",
     "/home/riann/.nuget/packages/xunit.runner.visualstudio/2.4.3/xunit.runner.visualstudio.2.4.3.nupkg.sha512",
-    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.16/microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
+    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.18/microsoft.aspnetcore.app.ref.6.0.18.nupkg.sha512"
   ],
   "logs": []
 }

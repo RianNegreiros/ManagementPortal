@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors();
 
 builder.Services.AddControllers().AddNewtonsoftJson(opts =>
 {
@@ -18,11 +19,10 @@ builder.Services.AddControllers().AddNewtonsoftJson(opts =>
     NamingStrategy = new CamelCaseNamingStrategy()
   };
 });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddCors();
 
 builder.Services.AddDbContext<DataDbContext>(options =>
 {
@@ -30,10 +30,10 @@ builder.Services.AddDbContext<DataDbContext>(options =>
   options.UseNpgsql(builder.Configuration.GetConnectionString("database.dev"));
 });
 
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IInventoryService, InventoryService>();
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IInventoryService, InventoryService>();
+builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 var app = builder.Build();
 
